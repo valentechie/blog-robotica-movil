@@ -1,17 +1,18 @@
 ---
 title: "Práctica 1: Aspiradora de gama baja"
 date: 2026-10-05 01:00:00 +0200
+categories: [Demo, Tutorial]
 tags: [python, autómata, robotica]
 description: "Aspiradora con navegación pseudoaleatoria mediante una máquina de estados"
 pin: true
 ---
 
 ## Objetivo
-Que la aspiradora cubra la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello la práctica pide implementar un autómata con al menos 3 estados (avanzando, retrocediendo y girando).
+El objetivo es que la aspiradora cubra la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello la práctica pide implementar un autómata con al menos 3 estados (avanzando, retrocediendo y girando).
 
-Datos a usar:
-- V: velocidad lineal
-- W: velocidad angular
+El robot se controla mediante dos velocidades:
+- **V (velocidad lineal):** hace avanzar o retroceder al robot
+- **W (velocidad angular):** hace girar al robot
 
 > No se permite usar `sleep`, porque bloquea el bucle y el robot deja de reaccionar
 {: .prompt-warning }
@@ -47,13 +48,15 @@ Repetir para siempre:
 ```
 {: file='Pseudocódigo' .nolineno}
 
-## Implementación
+<!--## Implementación
 
 ## Problemas y ajustes
 
 <!-- Capturas de los problemas y cómo los resolví -->
 
-## Resultado
+<!--## Resultado
 
 <!-- Vídeo final -->
 <!-- Captura con el porcentaje de cobertura -->
+
+Esta práctica corresponde al ejercicio [Basic Vacuum Cleaner](https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner) de Robotics Academy.
