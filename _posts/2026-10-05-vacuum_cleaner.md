@@ -8,16 +8,18 @@ mermaid: true
 ---
 
 ## Objetivo
-Que la aspiradora cubra la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello nos pide implementar un automata con al menos 3 estados (avanzando, retrocediendo y girando).
+Que la aspiradora cubra la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello la práctica pide implementar un automata con al menos 3 estados (avanzando, retrocediendo y girando).
 
 Datos que nos dan:
-- V: velocidad linear
+- V: velocidad lineal
 - W: velocidad angular
 
-### Máquina de estados
+## Diseño del autómata
 Para realizarla sigo el siguiente esquema:
 
 ![Máquina de estados](/assets/img/maquina_estados.png)
+
+### pseudocódigo
 
 ```txt
 Repetir para siempre:
