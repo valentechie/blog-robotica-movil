@@ -48,13 +48,13 @@ Repetir para siempre:
 ```
 {: file='Pseudocódigo' .nolineno}
 
-<!--## Implementación
+<!-- ## Implementación-->
 
-## Problemas y ajustes
+<!-- ## Problemas y ajustes -->
 
 <!-- Capturas de los problemas y cómo los resolví -->
 
-<!--## Resultado
+<!-- ## Resultado-->
 
 <!-- Vídeo final -->
 <!-- Captura con el porcentaje de cobertura -->
