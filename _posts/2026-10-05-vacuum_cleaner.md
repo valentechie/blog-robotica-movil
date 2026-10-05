@@ -1,7 +1,6 @@
 ---
 title: "Práctica 1: Aspiradora de gama baja"
 date: 2026-10-05 01:00:00 +0200
-categories: [Demo, Tutorial]
 tags: [python, autómata, robotica]
 description: "Aspiradora con navegación pseudoaleatoria mediante una máquina de estados"
 pin: true
