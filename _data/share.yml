@@ -1,7 +1,7 @@
 #  Sharing options at the bottom of the post.
 #  Icons from <https://fontawesome.com/>
 
-# platforms:
+platforms: []
   #- type: Twitter
   #  icon: "fa-brands fa-square-x-twitter"
   #  link: "https://twitter.com/intent/tweet?text=TITLE&url=URL"
