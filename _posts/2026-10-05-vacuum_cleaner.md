@@ -7,7 +7,7 @@ pin: true
 mermaid: true
 ---
 
-# Objetivo
+## Objetivo
 Que la aspiradora cubra la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello nos pide implementar un automata con al menos 3 estados (avanzando, retrocediendo y girando).
 
 Datos que nos dan:
