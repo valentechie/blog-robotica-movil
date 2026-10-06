@@ -60,13 +60,7 @@ Repetir para siempre:
 
 **Giro con la orientación.** Antes de girar, guardo hacia dónde mira el robot (su yaw) y elijo un ángulo aleatorio entre 60º y 170º. Gira hasta que la diferencia con la orientación inicial llega a ese ángulo. Como el yaw salta de 180º a -180º, corrijo la resta para que no falle en ese punto. Al ser aleatorio, cada vez sale en una dirección distinta y cubre más casa.
 
-**Espiral.** Al arrancar, el robot gira con W fija mientras sube poco a poco V. Como el radio es:
-
-$$
-r = \frac{V}{W}
-$$
-
-las vueltas se van abriendo. Sale de la espiral si encuentra un obstáculo o cuando V llega a la velocidad de avance normal.
+**Espiral.** Al arrancar, el robot gira con W fija mientras sube poco a poco V. Como el radio es **`r = V / W`**, las vueltas se van abriendo. Sale de la espiral si encuentra un obstáculo o cuando V llega a la velocidad de avance normal.
 
 ## Problemas y ajustes
 
@@ -77,7 +71,11 @@ las vueltas se van abriendo. Sale de la espiral si encuentra un obstáculo o cua
 
 <!-- ## Resultado-->
 
-<!-- Vídeo final -->
-<!-- Captura con el porcentaje de cobertura -->
+## Vídeo final
+{% include embed/youtube.html id='Zf_p245PtUw' %}
+
+## Captura con el porcentaje de cobertura
+![Resultado final](/assets/img/resultado.png)
+_Cobertura final: 36,61% tras 11,03 minutos_
 
 Esta práctica corresponde al ejercicio [Basic Vacuum Cleaner](https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner) de Robotics Academy.
