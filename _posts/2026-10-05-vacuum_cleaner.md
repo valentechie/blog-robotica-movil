@@ -7,7 +7,7 @@ pin: true
 ---
 
 ## Objetivo
-La aspiradora debe cubrir la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes. Para ello, la práctica pide implementar un autómata con al menos 3 estados (avanzando, retrocediendo y girando). Además, he añadido un cuarto estado opcional, la espiral, que mejora la cobertura al inicio.
+La aspiradora debe cubrir la mayor parte posible de la casa moviéndose de forma pseudoaleatoria, es decir, sin plan ni mapa. A base de moverse "al azar" durante suficiente tiempo, acaba pasando por casi todas partes.
 
 El robot se controla mediante dos velocidades:
 - **V (velocidad lineal):** hace avanzar o retroceder al robot
@@ -17,7 +17,7 @@ El robot se controla mediante dos velocidades:
 {: .prompt-warning }
 
 ## Diseño de la FSM
-El comportamiento de la aspiradora se organiza en tres estados:
+El comportamiento de la aspiradora se organiza en cuatro estados:
 
 ![Máquina de estados](/assets/img/maquina_estados.png)
 _Máquina de estados de la aspiradora_
@@ -31,7 +31,7 @@ Repetir para siempre:
     Si estado == espiral
         W fija y V que aumenta con el tiempo
         si hay algo delante, pasa al siguiente estado: RETROCEDER
-        si la espiral ya es muy grande: pasa al siguiente estado: AVANZAR
+        si la espiral ya es muy grande, pasa al siguiente estado: AVANZAR
 
     Si estado == avanzar
         V positiva y W = 0
@@ -52,11 +52,16 @@ Repetir para siempre:
 ```
 {: file='Pseudocódigo' .nolineno}
 
+## Problemas y ajustes
+Al probarlo, la simulación iba muy lenta, así que subí la velocidad de avance a 0,6 m/s y la de giro a 1,5 rad/s. Para que siguiera frenando a tiempo, también aumenté la distancia de seguridad a 45 cm.
+
+Al principio solo miraba los rayos del 70 al 110, y el robot acababa rozando los muebles con los lados. Ampliarlo al 45-135 lo mejoró.
+
+Por último, la espiral se notó bastante, sin ella el robot llegó a un 14,83 % y con ella a un 24,81 %, además de llegar a otra habitación. También probé a que girara hacia un lado aleatorio, pero no noté mejora y lo dejé como estaba.
+
 ## Resultados
 
-### Vídeo final
 {% include embed/youtube.html id='Zf_p245PtUw' %}
-_Ejecución de la aspiradora_
 
 ### Captura con el porcentaje de cobertura
 En otra de las pruebas, tras 11min 3s, el robot llegó a un 36,61 % de cobertura:
