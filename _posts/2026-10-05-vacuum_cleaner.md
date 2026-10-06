@@ -1,7 +1,7 @@
 ---
 title: "Práctica 1: Aspiradora básica"
 date: 2026-10-05 01:00:00 +0200
-tags: [python, autómata, robotica]
+tags: [python, autómata, robótica]
 description: "Aspiradora con navegación pseudoaleatoria mediante una máquina de estados"
 pin: true
 ---
@@ -33,7 +33,7 @@ Repetir para siempre:
         si hay algo delante, pasa al siguiente estado: RETROCEDER
         si la espiral ya es muy grande, pasa al siguiente estado: AVANZAR
 
-    Si estado == avanzar
+    También si estado == avanzar
         V positiva y W = 0
         termina si hay algo delante que le impide avanzar
         pasa al siguiente estado: RETROCEDER
@@ -52,6 +52,11 @@ Repetir para siempre:
 ```
 {: file='Pseudocódigo' .nolineno}
 
+## Implementación
+Para girar, guardo hacia dónde mira el robot (su yaw) y lo dejo girar hasta que la diferencia llega a un ángulo aleatorio entre 60º y 170º. Tuve que corregir el salto del yaw de 180º a -180º, porque si no, la resta fallaba al pasar por ese punto.
+
+Como no se podía usar `sleep`, guardo la hora cada vez que el robot cambia de estado y en cada vuelta del bucle miro cuánto tiempo lleva en él. Así el robot nunca deja de mirar el láser, y lo uso para que retroceda medio segundo antes de girar.
+
 ## Problemas y ajustes
 Al probarlo, la simulación iba muy lenta, así que subí la velocidad de avance a 0,6 m/s y la de giro a 1,5 rad/s. Para que siguiera frenando a tiempo, también aumenté la distancia de seguridad a 45 cm.
 
@@ -64,7 +69,7 @@ Por último, la espiral se notó bastante, sin ella el robot llegó a un 14,83 %
 {% include embed/youtube.html id='Zf_p245PtUw' %}
 
 ### Captura con el porcentaje de cobertura
-En otra de las pruebas, tras 11min 3s, el robot llegó a un 36,61 % de cobertura:
+En otra de las pruebas, tras 11 min 3 s, el robot llegó a un 36,61 % de cobertura:
 
 ![Resultado de otra prueba](/assets/img/resultado.png)
 _Mapa de cobertura al terminar la prueba_
