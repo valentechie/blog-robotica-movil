@@ -47,11 +47,15 @@ Repetir para siempre:
 ```
 {: file='Pseudocódigo' .nolineno}
 
-<!-- ## Implementación-->
+## Implementación
+
+**Detección de obstáculos.** Como el bumper está desactivado, los choques se detectan con el láser. En lugar de usar un único rayo, compruebo un abanico de los rayos centrales (de 70 a 110, siendo el 90 el que apunta al frente). Si alguno mide menos de 35 cm, considero que hay un obstáculo. Así también detecto objetos que no están justo delante.
+
+**Medir el tiempo sin sleep.** Cada vez que el robot cambia de estado, guardo la hora. En cada vuelta del bucle calculo cuánto tiempo lleva en ese estado, y cuando pasa el tiempo deseado, cambia al siguiente. Así el bucle nunca se bloquea y el robot sigue atento al láser.
+
+**Giro con la orientación.** Al empezar a girar guardo la orientación del robot (yaw) y elijo un ángulo aleatorio entre 60° y 170°. El robot gira hasta que la diferencia entre su orientación actual y la inicial alcanza ese ángulo. Como el yaw pasa de 180° a -180°, ajusto la diferencia para que siempre quede en el rango correcto. Un ángulo aleatorio hace que el robot salga cada vez en una dirección distinta y cubra más superficie.
 
 <!-- ## Problemas y ajustes -->
-
-<!-- Capturas de los problemas y cómo los resolví -->
 
 <!-- ## Resultado-->
 
