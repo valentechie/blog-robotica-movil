@@ -54,28 +54,39 @@ Repetir para siempre:
 
 ## Implementación
 
-**Detección de obstáculos.** Como el bumper está desactivado, uso el láser. De sus 180 medidas, miro las que van de la 45 a la 135 (la 90 es la del frente), para ver también lo que hay un poco a los lados. Si alguna marca menos de 45 cm, el robot deja de avanzar.
+**Detección de obstáculos**
+- El bumper está desactivado, así que uso el láser
+- Miro las medidas de la 45 a la 135 (la 90 es el frente) para ver también los lados
+- Si alguna marca menos de 45 cm, hay obstáculo
 
-**Medir el tiempo sin sleep.** Al cambiar de estado apunto la hora, y en cada vuelta del bucle miro cuánto tiempo lleva en él. Así el robot nunca se bloquea y sigue atento al láser. Lo uso para retroceder medio segundo a 0,2 m/s, unos 10 cm, lo justo para separarse de la pared, ya que va a ciegas hacia atrás.
+**Tiempo sin sleep**
+- Al cambiar de estado guardo la hora y en cada vuelta miro cuánto lleva
+- El robot nunca se bloquea y sigue atento al láser
+- Lo uso para retroceder 0,5 s a 0,2 m/s (unos 10 cm)
 
-**Giro con la orientación.** Antes de girar, guardo hacia dónde mira el robot (su yaw) y elijo un ángulo aleatorio entre 60º y 170º. Gira hasta que la diferencia con la orientación inicial llega a ese ángulo. Como el yaw salta de 180º a -180º, corrijo la resta para que no falle en ese punto. Al ser aleatorio, cada vez sale en una dirección distinta y cubre más casa.
+**Giro con la orientación**
+- Guardo el yaw al empezar y elijo un ángulo aleatorio entre 60º y 170º
+- Gira hasta que la diferencia con el yaw inicial llega a ese ángulo
+- Corrijo el salto del yaw de 180º a -180º
 
-**Espiral.** Al arrancar, el robot gira con W fija mientras sube poco a poco V. Como el radio es **`r = V / W`**, las vueltas se van abriendo. Sale de la espiral si encuentra un obstáculo o cuando V llega a la velocidad de avance normal.
+**Espiral**
+- W fija y V creciente: como `r = V / W`, las vueltas se abren.
+- Termina si hay un obstáculo o cuando V llega a la velocidad de avance.
 
 ## Problemas y ajustes
 
-**Entorno de ejecución.** En los ordenadores del laboratorio no tenía permisos para usar Docker, así que ejecuté el simulador con Podman, guardando las imágenes en el disco local porque la carpeta personal está en un servidor de red.
+**Giro por tiempo o por ángulo.** La página del ejercicio recomienda girar durante un tiempo aleatorio y usar `sleep` para esperar. Como el enunciado de la asignatura no permite `sleep` y sí deja usar la orientación, decidí medir el giro con el yaw. Así no hace falta girar un ángulo exacto: basta con girar aproximadamente uno aleatorio, que es lo que necesita la navegación pseudoaleatoria.
 
-**Velocidad de la simulación.** 
+**Tiempo real y tiempo simulado.** Los tiempos del código se miden con el reloj del ordenador, no con el del simulador. Como la simulación iba a un 30 % del tiempo real, el robot retrocedía menos distancia de la calculada y la espiral se abría más despacio. Aun así el comportamiento fue correcto, pero en un ordenador con GPU estos valores podrían necesitar un ajuste.
 
+## Resultados
 
-<!-- ## Resultado-->
-
-## Vídeo final
+### Vídeo final
 {% include embed/youtube.html id='Zf_p245PtUw' %}
 
-## Captura con el porcentaje de cobertura
+### Captura con el porcentaje de cobertura
 ![Resultado final](/assets/img/resultado.png)
 _Cobertura final: 36,61% tras 11,03 minutos_
+
 
 Esta práctica corresponde al ejercicio [Basic Vacuum Cleaner](https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner) de Robotics Academy.
