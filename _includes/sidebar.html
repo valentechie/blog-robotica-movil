@@ -11,9 +11,9 @@
       {%- endif -%}
     </a>
 
-    <!-- Nombre de la barra lateral: `nombre_lateral` en _config.yml (si no existe, usa `title`) -->
+    <!-- Nombre y descripción de la barra lateral: `nombre_lateral` y `descripcion_lateral` en _config.yml (si no existen, usa `title` y `tagline`) -->
     <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.nombre_lateral | default: site.title }}</a>
-    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+    <p class="site-subtitle fst-italic mb-0">{{ site.descripcion_lateral | default: site.tagline }}</p>
   </header>
   <!-- .profile-wrapper -->
 

@@ -15,7 +15,8 @@ timezone: Europe/Madrid
 # ↓ --------------------------
 
 title: Robótica Móvil # the main title
-nombre_lateral: Valentina Arminta
+nombre_lateral: Valentina<br>Arminta
+descripcion_lateral: "Estudiante de Ingeniería de Robótica Software"
 tagline: Blog para la documentación de las prácticas de la asignatura # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
