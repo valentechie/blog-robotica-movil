@@ -14,7 +14,7 @@ timezone: Europe/Madrid
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Robótica Móvil # the main title
+title: Valentina Arminta # the main title
 
 tagline: Blog para la documentación de las prácticas de la asignatura # it will display as the subtitle
 
@@ -63,7 +63,6 @@ portada:
   asignatura: "Robótica Móvil"
   universidad: "URJC"
   curso: "2026/27"
-  autora: "Valentina Arminta García"
 
 # Web Analytics Settings
 analytics:
