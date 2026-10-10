@@ -1,0 +1,37 @@
+<!-- Portada personalizada de la página de inicio -->
+{% assign p = site.portada %}
+{% assign n_practicas = site.posts | where_exp: 'item', 'item.hidden != true' | size %}
+
+<section class="portada" aria-label="Portada">
+  <div class="portada-texto">
+    {% if p.etiqueta %}<span class="portada-etiqueta">{{ p.etiqueta }}</span>{% endif %}
+
+    <h1 class="portada-titulo">{{ site.title }}</h1>
+    <p class="portada-subtitulo">{{ site.tagline }}</p>
+
+    <ul class="portada-datos">
+      {% if p.universidad %}<li><i class="fas fa-building-columns fa-fw"></i>{{ p.universidad }}</li>{% endif %}
+      {% if p.curso %}<li><i class="far fa-calendar fa-fw"></i>Curso {{ p.curso }}</li>{% endif %}
+      {% if p.autora %}<li><i class="far fa-user fa-fw"></i>{{ p.autora }}</li>{% endif %}
+      <li><i class="fas fa-robot fa-fw"></i>{{ n_practicas }} {% if n_practicas == 1 %}práctica{% else %}prácticas{% endif %}</li>
+    </ul>
+  </div>
+
+  <!-- Dibujo: trayectoria de un robot (espiral + avance), hecho a mano en SVG -->
+  <svg class="portada-dibujo" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="rejilla" width="22" height="22" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1" class="rejilla-punto" />
+      </pattern>
+    </defs>
+    <rect width="220" height="220" rx="28" class="dibujo-fondo" />
+    <rect width="220" height="220" rx="28" fill="url(#rejilla)" />
+    <path class="trayectoria"
+      d="M88 112 c0 -8 12 -10 16 -3 c6 10 -4 22 -16 21 c-18 -2 -24 -24 -12 -37 c16 -17 46 -10 52 12 c7 26 -16 48 -42 46 c-30 -3 -46 -34 -34 -60 L58 52 L172 52 L172 178" />
+    <circle class="punto-inicio" cx="88" cy="112" r="4" />
+    <g class="robot" transform="translate(172 178)">
+      <circle r="13" />
+      <line x1="0" y1="0" x2="0" y2="-9" />
+    </g>
+  </svg>
+</section>

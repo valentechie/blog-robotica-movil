@@ -1,0 +1,365 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* ==========================================================================
+   Estilo propio del blog — tema claro, limpio y ordenado
+   ========================================================================== */
+
+/* ---------- 1. Paleta ---------- */
+
+:root,
+:root[data-bs-theme='light'] {
+  /* Base de la paleta (cambia estos y se actualiza todo) */
+  --c-fondo: #fafaf7;
+  --c-superficie: #ffffff;
+  --c-lateral: #f1f5f3;
+  --c-borde: #e5eae7;
+  --c-tinta: #22262e;
+  --c-tinta-suave: #5f6670;
+  --c-acento: #2e7d74;
+  --c-acento-claro: #e3f1ee;
+  --c-calido: #f0b27a;
+
+  --f-texto: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-titulos: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --f-codigo: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --radio: 14px;
+  --sombra-suave: 0 1px 2px rgb(34 38 46 / 4%), 0 4px 16px rgb(34 38 46 / 5%);
+
+  /* Variables del tema Chirpy, mapeadas a la paleta */
+  --main-bg: var(--c-fondo);
+  --main-border-color: var(--c-borde);
+  --text-color: var(--c-tinta);
+  --text-muted-color: var(--c-tinta-suave);
+  --heading-color: var(--c-tinta);
+  --label-color: var(--c-tinta-suave);
+  --link-color: var(--c-acento);
+  --link-underline-color: #b9dcd6;
+  --blockquote-border-color: var(--c-acento);
+  --blockquote-text-color: var(--c-tinta-suave);
+
+  --sidebar-bg: var(--c-lateral);
+  --sidebar-border-color: var(--c-borde);
+  --sidebar-muted-color: var(--c-tinta-suave);
+  --sidebar-active-color: var(--c-acento);
+  --sidebar-hover-bg: rgb(46 125 116 / 8%);
+  --site-title-color: var(--c-tinta);
+  --site-subtitle-color: var(--c-tinta-suave);
+  --avatar-border-color: var(--c-superficie);
+
+  --topbar-bg: rgb(250 250 247 / 80%);
+  --topbar-text-color: var(--c-tinta-suave);
+  --search-border-color: var(--c-borde);
+  --input-focus-border-color: var(--c-acento);
+
+  --card-bg: var(--c-superficie);
+  --card-hover-bg: var(--c-acento-claro);
+  --card-shadow: var(--sombra-suave);
+  --post-list-text-color: var(--c-tinta-suave);
+  --btn-paginator-hover-color: var(--c-acento-claro);
+
+  --toc-highlight: var(--c-acento);
+  --btn-share-hover-color: var(--c-acento);
+  --tag-hover: var(--c-acento-claro);
+  --checkbox-checked-color: var(--c-acento);
+  --timeline-node-bg: var(--c-acento);
+
+  --highlight-bg-color: #f5f7f6;
+  --inline-code-bg: var(--c-acento-claro);
+  --highlighter-rouge-color: #1f5f58;
+  --language-border-color: var(--c-borde);
+
+  --prompt-tip-bg: #e9f6ef;
+  --prompt-tip-icon-color: #2f9e6b;
+  --prompt-info-bg: #e8f1fb;
+  --prompt-info-icon-color: #3a7bd5;
+  --prompt-warning-bg: #fdf3e6;
+  --prompt-warning-icon-color: #e08a2c;
+  --prompt-danger-bg: #fcebea;
+  --prompt-danger-icon-color: #d1493f;
+}
+
+/* ---------- 2. Tipografía ---------- */
+
+body {
+  font-family: var(--f-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5,
+.site-title,
+.card-title,
+#topbar-title {
+  font-family: var(--f-titulos) !important;
+  letter-spacing: -0.01em;
+}
+
+code, pre, kbd, .highlight {
+  font-family: var(--f-codigo) !important;
+}
+
+/* ---------- 3. Barra lateral ---------- */
+
+#sidebar {
+  border-right: 1px solid var(--c-borde);
+
+  #avatar {
+    box-shadow:
+      0 0 0 4px var(--c-superficie),
+      0 0 0 6px var(--c-acento-claro);
+  }
+
+  .site-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .site-subtitle {
+    font-style: normal !important;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .nav-item {
+    a.nav-link {
+      border-radius: 10px;
+      font-weight: 500;
+      color: var(--c-tinta-suave);
+
+      span {
+        letter-spacing: 0.06em;
+        font-size: 0.78rem;
+      }
+    }
+
+    &.active .nav-link {
+      color: var(--c-acento);
+      background-color: var(--c-superficie);
+      box-shadow: var(--sombra-suave);
+    }
+  }
+}
+
+/* ---------- 4. Portada (página de inicio) ---------- */
+
+.portada {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 2.25rem 2.25rem;
+  background:
+    radial-gradient(circle at 100% 0%, var(--c-acento-claro) 0%, transparent 55%),
+    var(--c-superficie);
+  border: 1px solid var(--c-borde);
+  border-radius: calc(var(--radio) + 6px);
+  box-shadow: var(--sombra-suave);
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+}
+
+.portada-etiqueta {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 0.9rem;
+  border-radius: 999px;
+  background: var(--c-acento-claro);
+  color: var(--c-acento);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portada-titulo {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--c-tinta);
+}
+
+.portada-subtitulo {
+  margin: 0 0 1.25rem;
+  max-width: 34rem;
+  color: var(--c-tinta-suave);
+  font-size: 1.05rem;
+}
+
+.portada-datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--c-borde);
+    border-radius: 999px;
+    background: var(--c-fondo);
+    color: var(--c-tinta-suave);
+    font-size: 0.85rem;
+
+    i {
+      color: var(--c-acento);
+    }
+  }
+}
+
+.portada-dibujo {
+  flex-shrink: 0;
+  width: 190px;
+  height: 190px;
+
+  @media (max-width: 767px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  .dibujo-fondo { fill: var(--c-fondo); }
+  .rejilla-punto { fill: #d5ddd9; }
+
+  .trayectoria {
+    fill: none;
+    stroke: var(--c-acento);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 6 7;
+  }
+
+  .punto-inicio { fill: var(--c-acento); }
+
+  .robot {
+    circle {
+      fill: var(--c-calido);
+      stroke: var(--c-superficie);
+      stroke-width: 3;
+    }
+
+    line {
+      stroke: var(--c-tinta);
+      stroke-width: 3;
+      stroke-linecap: round;
+    }
+  }
+}
+
+/* ---------- 5. Tarjetas de la lista de posts ---------- */
+
+#post-list {
+  margin-top: 1.75rem;
+
+  .card-wrapper {
+    border: 1px solid var(--c-borde) !important;
+    border-radius: var(--radio);
+    background: var(--c-superficie);
+    box-shadow: none;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+      border-color: #bcdcd6 !important;
+      box-shadow: var(--sombra-suave);
+      transform: translateY(-2px);
+    }
+  }
+
+  .card .card-body .card-title {
+    font-weight: 600;
+  }
+
+  .pin {
+    color: var(--c-acento) !important;
+  }
+}
+
+/* ---------- 6. Contenido de los posts ---------- */
+
+article .content,
+.content {
+  h2 {
+    margin-top: 2.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--c-borde);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-right: 0.6rem;
+      border-radius: 3px;
+      background: var(--c-acento);
+      vertical-align: 0.15em;
+    }
+  }
+
+  h3 {
+    color: var(--c-tinta);
+  }
+
+  a:not(.img-link) {
+    text-underline-offset: 3px;
+  }
+
+  img {
+    border-radius: var(--radio);
+  }
+
+  blockquote:not([class^='prompt-']) {
+    border-left-width: 3px;
+    background: var(--c-acento-claro);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: 0.75rem 1rem;
+  }
+
+  [class^='prompt-'] {
+    border-radius: var(--radio);
+  }
+
+  div[class^='language-'],
+  .highlight {
+    border-radius: var(--radio);
+  }
+
+  div[class^='language-'] {
+    border: 1px solid var(--c-borde);
+    box-shadow: none;
+  }
+}
+
+/* Etiquetas (tags) */
+.post-tag {
+  border-radius: 999px !important;
+}
+
+/* Selección de texto */
+::selection {
+  background: #cfe7e2;
+  color: var(--c-tinta);
+}
