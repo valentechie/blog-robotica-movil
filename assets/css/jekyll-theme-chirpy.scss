@@ -21,14 +21,14 @@
 :root,
 :root[data-bs-theme='light'] {
   /* Base de la paleta (cambia estos y se actualiza todo) */
-  --c-fondo: #fafaf7;
+  --c-fondo: #fcfafa;
   --c-superficie: #ffffff;
-  --c-lateral: #f1f5f3;
-  --c-borde: #e5eae7;
-  --c-tinta: #22262e;
-  --c-tinta-suave: #5f6670;
-  --c-acento: #2e7d74;
-  --c-acento-claro: #e3f1ee;
+  --c-lateral: #f9f1f4;
+  --c-borde: #efe4e8;
+  --c-tinta: #2a2328;
+  --c-tinta-suave: #6b5f66;
+  --c-acento: #b03a6d;
+  --c-acento-claro: #fbe8ef;
   --c-calido: #f0b27a;
 
   --f-texto: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -46,7 +46,7 @@
   --heading-color: var(--c-tinta);
   --label-color: var(--c-tinta-suave);
   --link-color: var(--c-acento);
-  --link-underline-color: #b9dcd6;
+  --link-underline-color: #efc3d4;
   --blockquote-border-color: var(--c-acento);
   --blockquote-text-color: var(--c-tinta-suave);
 
@@ -54,12 +54,12 @@
   --sidebar-border-color: var(--c-borde);
   --sidebar-muted-color: var(--c-tinta-suave);
   --sidebar-active-color: var(--c-acento);
-  --sidebar-hover-bg: rgb(46 125 116 / 8%);
+  --sidebar-hover-bg: rgb(176 58 109 / 8%);
   --site-title-color: var(--c-tinta);
   --site-subtitle-color: var(--c-tinta-suave);
   --avatar-border-color: var(--c-superficie);
 
-  --topbar-bg: rgb(250 250 247 / 80%);
+  --topbar-bg: rgb(252 250 250 / 80%);
   --topbar-text-color: var(--c-tinta-suave);
   --search-border-color: var(--c-borde);
   --input-focus-border-color: var(--c-acento);
@@ -76,9 +76,9 @@
   --checkbox-checked-color: var(--c-acento);
   --timeline-node-bg: var(--c-acento);
 
-  --highlight-bg-color: #f5f7f6;
+  --highlight-bg-color: #faf6f7;
   --inline-code-bg: var(--c-acento-claro);
-  --highlighter-rouge-color: #1f5f58;
+  --highlighter-rouge-color: #8e2c57;
   --language-border-color: var(--c-borde);
 
   --prompt-tip-bg: #e9f6ef;
@@ -241,7 +241,7 @@ code, pre, kbd, .highlight {
   }
 
   .dibujo-fondo { fill: var(--c-fondo); }
-  .rejilla-punto { fill: #d5ddd9; }
+  .rejilla-punto { fill: #ecdbe1; }
 
   .trayectoria {
     fill: none;
@@ -283,7 +283,7 @@ code, pre, kbd, .highlight {
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 
     &:hover {
-      border-color: #bcdcd6 !important;
+      border-color: #efc3d4 !important;
       box-shadow: var(--sombra-suave);
       transform: translateY(-2px);
     }
@@ -358,8 +358,37 @@ article .content,
   border-radius: 999px !important;
 }
 
+/* Botones con contorno: etiquetas populares y Anterior/Siguiente al final de
+   cada post. Bootstrap los pinta en azul por defecto; aquí usan la paleta. */
+.btn.btn-outline-primary {
+  --bs-btn-color: var(--c-tinta-suave);
+  --bs-btn-border-color: var(--c-borde);
+  --bs-btn-hover-color: var(--c-acento);
+  --bs-btn-hover-bg: var(--c-acento-claro);
+  --bs-btn-hover-border-color: var(--link-underline-color);
+  --bs-btn-active-color: var(--c-acento);
+  --bs-btn-active-bg: var(--c-acento-claro);
+  --bs-btn-active-border-color: var(--link-underline-color);
+  --bs-btn-focus-shadow-rgb: 176, 58, 109;
+
+  &:not(.disabled):hover {
+    border-color: var(--link-underline-color) !important;
+  }
+}
+
+/* Botón relleno (aviso de "hay una versión nueva" del blog) */
+.btn.btn-primary {
+  --bs-btn-bg: var(--c-acento);
+  --bs-btn-border-color: var(--c-acento);
+  --bs-btn-hover-bg: #95305c;
+  --bs-btn-hover-border-color: #95305c;
+  --bs-btn-active-bg: #95305c;
+  --bs-btn-active-border-color: #95305c;
+  --bs-btn-focus-shadow-rgb: 176, 58, 109;
+}
+
 /* Selección de texto */
 ::selection {
-  background: #cfe7e2;
+  background: #f8d3e1;
   color: var(--c-tinta);
 }
