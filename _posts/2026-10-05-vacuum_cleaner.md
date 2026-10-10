@@ -3,7 +3,7 @@ title: "Práctica 1: Aspiradora básica"
 date: 2026-10-05 01:00:00 +0200
 tags: [python, autómata, robótica]
 description: "Aspiradora con navegación pseudoaleatoria mediante una máquina de estados"
-pin: true
+pin: false
 ---
 
 ## Objetivo
@@ -58,6 +58,8 @@ Para girar, guardo hacia dónde mira el robot (su yaw) y lo dejo girar hasta que
 Como no se podía usar `sleep`, guardo la hora cada vez que el robot cambia de estado y en cada vuelta del bucle miro cuánto tiempo lleva en él. Así el robot nunca deja de mirar el láser, y lo uso para que retroceda medio segundo antes de girar.
 
 ## Problemas y ajustes
+<-- Mencionar lo de podman -->
+
 Al probarlo, la simulación iba muy lenta, así que subí la velocidad de avance a 0,6 m/s y la de giro a 1,5 rad/s. Para que siguiera frenando a tiempo, también aumenté la distancia de seguridad a 45 cm.
 
 Al principio solo miraba los rayos del 70 al 110, y el robot acababa rozando los muebles con los lados. Ampliarlo al 45-135 lo mejoró.
