@@ -328,7 +328,7 @@ article .content,
   }
 
   img {
-    border-radius: var(--radio);
+    border-radius: 0;
   }
 
   blockquote:not([class^='prompt-']) {
