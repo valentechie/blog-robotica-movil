@@ -3,7 +3,7 @@ title: "Práctica 1: Aspiradora básica"
 date: 2026-10-05 01:00:00 +0200
 image:
   path: /assets/img/portada_aspiradora.png
-  alt: Mapa de cobertura al terminar la prueba
+  alt: Aspiradora en la simulación
 tags: [python, autómata, robótica]
 description: "Aspiradora con navegación pseudoaleatoria mediante una máquina de estados"
 pin: false
@@ -72,5 +72,12 @@ Por último, la espiral se notó bastante, sin ella el robot llegó a un 14,83 %
 ## Resultados
 
 {% include embed/youtube.html id='Zf_p245PtUw' %}
+
+### Captura con el porcentaje de cobertura
+En otra de las pruebas, tras 11 min 3 s, el robot llegó a un 36,61 % de cobertura:
+
+![Resultado de otra prueba](/assets/img/resultado.png)
+_Mapa de cobertura al terminar la prueba_
+
 
 Esta práctica corresponde al ejercicio [Basic Vacuum Cleaner](https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner) de Robotics Academy.
