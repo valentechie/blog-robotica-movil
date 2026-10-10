@@ -15,7 +15,7 @@ timezone: Europe/Madrid
 # ↓ --------------------------
 
 title: Robótica Móvil # the main title
-
+nombre_lateral: Valentina Arminta
 tagline: Blog para la documentación de las prácticas de la asignatura # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
