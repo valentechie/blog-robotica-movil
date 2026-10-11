@@ -7,7 +7,10 @@ pin: true
 ---
 
 ## Objetivo
-Programar un coche de Formula1 en una carrera de seguir la linea roja del centro de la carretera
+Un Fórmula 1 simulado que tiene que seguir la línea roja pintada en el centro del circuito, usando solo lo que ve su cámara. La práctica pide hacerlo con un controlador PID reactivo.
+
+## Sistema de control
+![Esquema del sistema](/assets/img/sistema_control.png)
 
 ## Diagrama de estados (Para el while)
 
