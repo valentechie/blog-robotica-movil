@@ -13,6 +13,11 @@ Un Fórmula 1 simulado que tiene que seguir la línea roja pintada en el centro 
 # Sistema de control
 ![Esquema del sistema](/assets/img/sistema_control.png)
 
+# Fundamentos de diseño
+## Diseño Holonómico
+
+## Diseño No Holonómico
+
 # Definiciones usadas
 
 ## Setpoint
