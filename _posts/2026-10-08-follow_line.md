@@ -1,6 +1,9 @@
 ---
 title: "Práctica 2: Visual follow Line"
 date: 2026-10-08 01:00:00 +0200
+image:
+  path: /assets/img/portada_followline.png
+  alt: Fórmula 1 en la simulación
 tags: [opencv, pid, control]
 description: "Control Visual con PID de un Fórmula1"
 pin: true
@@ -10,7 +13,7 @@ math: true
 ## Objetivo
 El objetivo de esta práctica es programar un Fórmula 1 para que siga la línea roja pintada en el centro del circuito, usando únicamente la información que obtiene de su cámara. El control debe ser **reactivo**, en cada iteración se decide qué hacer a partir de lo que se ve en ese instante, sin mapa ni trayectoria calculada de antemano.
 
-Más allá de completar la vuelta, el controlador debe cumplir cuatro condiciones, no oscilar, ser rápido, funcionar en circuitos distintos sin tocar el código y recuperar la línea si llega a perderla. A esto se suma que el ejercicio se resuelve dos veces, una para el coche holonómico y otra para el no holonómico, porque la forma de moverse de cada uno condiciona el control.
+Más allá de completar la vuelta, el controlador debe cumplir cuatro condiciones, no oscilar, ser rápido, funcionar en circuitos distintos sin tocar el código y recuperar la línea si llega a perderla.
 
 ## Fundamentos teóricos
 
@@ -77,22 +80,89 @@ Los dos comportamientos defectuosos típicos son:
 | Oscilaciones inestables | El coche zigzaguea con amplitud creciente hasta salirse | $$ K_p $$ demasiado alto o $$ K_d $$ insuficiente |
 | Respuesta lenta | El coche no llega a tiempo a las curvas | $$ K_p $$ demasiado bajo o velocidad excesiva |
 
-### Holonómico vs. no holonómico
+### Holonómico y no holonómico
+ 
+Un robot que se desplaza por un plano tiene tres grados de libertad, posición $$ x $$, posición $$ y $$ y orientación $$ \theta $$. Un robot **holonómico** los controla de forma independiente y puede desplazarse en cualquier dirección en cualquier instante. Uno **no holonómico** está sujeto a restricciones cinemáticas y necesita maniobrar, como un coche real, que no puede desplazarse lateralmente hacia un hueco de aparcamiento.
+ 
+Esto limita el control de dos formas. El vehículo no holonómico no alcanza cualquier velocidad angular que se le pida, si el giro es más cerrado que su radio mínimo no lo ejecuta, y su dirección tarda en responder, de modo que la corrección llega con retardo. Por eso se implementan dos versiones del controlador, con la misma estructura pero distinto ajuste de ganancias y de velocidad.
+ 
+## Control
+ 
+### Controlador P
+ 
+La primera versión implementa solo el término proporcional, con velocidad lineal constante y reducida. El objetivo no es ir rápido sino comprobar que la cadena completa funciona, que la línea se detecta, que el error tiene el signo correcto y que el coche reacciona en la dirección esperada.
+ 
+```plaintext
+mientras sea verdad
+    imagen = capturar de la camara
+    mascara = filtrar rojo en HSV
+    cx = centroide de la mascara
+    error = cx - centro_imagen
+ 
+    V = constante baja
+    W = Kp * error
+ 
+    aplicar V y W
+```
+ 
+Conviene verificar el signo del resultado. Una velocidad angular positiva hace girar al coche hacia la izquierda, mientras que un error positivo significa que la línea está a la derecha, por lo que puede ser necesario invertir el signo.
+ 
 
-Un robot que se desplaza por un plano tiene tres grados de libertad, posición $$ x $$, posición $$ y $$ y orientación $$ \theta $$.
+_Coche oscilando con control P_
+ 
+### Controlador PD
+ 
+El control proporcional puro oscila porque corrige en función de dónde está la línea pero no de hacia dónde se está moviendo. Cuando el coche se acerca al centro con mucha velocidad angular el término proporcional ya casi no corrige, pero la inercia del giro lo lleva a pasarse al otro lado, y el ciclo se repite.
+ 
+El término derivativo incorpora esa tendencia. Al depender de la diferencia entre el error actual y el anterior, su signo es contrario al del movimiento cuando el coche se aproxima al centro, de modo que frena el giro antes de que se pase. Requiere guardar el error de la iteración previa.
+ 
+```plaintext
+error_prev = 0        # fuera del bucle
+ 
+mientras verdadero
+    ...
+    derivada = error - error_prev
+    W = Kp * error + Kd * derivada
+ 
+    error_prev = error    # al final de cada iteracion
+```
+ 
+Además de eliminar el zigzagueo permite subir la velocidad, ya que sin él cualquier aumento amplifica las oscilaciones hasta desestabilizar el coche.
+ 
+### Término integral
+ 
+El término integral corrige desviaciones pequeñas y persistentes, como circular de forma constante ligeramente desplazado respecto a la línea. Es imprescindible limitar su acumulación, lo que se conoce como **anti-windup**, porque de lo contrario la suma crece indefinidamente. En una curva larga alcanza un valor muy alto y, al volver a la recta, el término sigue ordenando girar durante un tiempo.
+ 
+```plaintext
+suma_error = suma_error + error
+suma_error = limitar(suma_error, -MAX, +MAX)
+W = Kp * error + Ki * suma_error + Kd * derivada
+```
+ 
+En un seguidor de línea el error no suele tener un sesgo permanente porque el trazado cambia continuamente de dirección, así que un PD bien ajustado suele ser suficiente.
 
-- **Holonómico:** puede controlar los tres grados de libertad de forma independiente, de modo que es capaz de desplazarse en cualquier dirección en cualquier instante.
-- **No holonómico:** está sujeto a **restricciones cinemáticas**. No puede moverse directamente en cualquier dirección, sino que necesita maniobrar para alcanzar una posición.
+## Recuperación de la línea
 
-Un coche real es no holonómico, no puede desplazarse lateralmente hacia un hueco de aparcamiento, sino que tiene que maniobrar para entrar en él.
+El coche puede perder la línea si llega a una curva demasiado rápido o si se desvía lo suficiente como para que la línea salga del campo de visión de la cámara. En ese caso el controlador no dispone de error que calcular y queda inservible, por lo que el comportamiento se organiza como una máquina de estados con dos estados:
 
+![FSM](/assets/img/recu_linea.png)
+_FSM de recuperación de la línea_
 
+- **Detección de la pérdida:** se considera que la línea no es visible cuando el área de la máscara ($$ m_{00} $$) queda por debajo de un umbral mínimo. Comparar contra un umbral, en lugar de contra cero, evita que unos pocos píxeles sueltos de ruido se interpreten como línea, y de paso impide la división por cero en $$ \eqref{eq:centroide} $$.
+- **Dirección de búsqueda:** se guarda el **signo del último error** conocido, que indica por qué lado se escapó la línea, y se gira hacia ese lado. Girar en la dirección equivocada alejaría definitivamente el coche del trazado.
+- **Parámetros de búsqueda:** velocidad lineal baja y velocidad angular elevada, para maniobrar sin alejarse más del trazado.
+- **Retorno:** en cuanto el área de la máscara vuelve a superar el umbral, se recupera el estado SEGUIR.
 
-El vehículo no holonómico no alcanza cualquier velocidad angular que se le solicite. Si se le pide un giro más cerrado que su radio mínimo, simplemente no lo ejecuta. Además, la dirección tarda en responder, de forma que la corrección llega con retardo respecto al momento en que se calculó.
-
-Por eso se implementan **dos versiones del controlador**. La estructura es idéntica, pero el ajuste de las ganancias y la gestión de la velocidad difieren.
-
-
+```plaintext
+si area_mascara > UMBRAL:
+    estado <- SEGUIR
+    calcular error y aplicar PID
+    ultimo_signo <- signo(error)
+sino:
+    estado <- BUSCAR
+    V <- baja
+    W <- ultimo_signo * W_busqueda
+```
 
 
 Esta práctica corresponde al ejercicio [Visual follow Line](https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/follow_line/) de Robotics Academy.
