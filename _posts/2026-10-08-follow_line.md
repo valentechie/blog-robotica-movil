@@ -6,7 +6,7 @@ image:
   alt: Fórmula 1 en la simulación
 tags: [opencv, pid, control]
 description: "Control Visual con PID de un Fórmula1"
-pin: true
+pin: false
 math: true
 ---
 
@@ -148,7 +148,7 @@ El coche puede perder la línea si llega a una curva demasiado rápido o si se d
 ![FSM](/assets/img/recu_linea.png)
 _FSM de recuperación de la línea_
 
-- **Detección de la pérdida:** se considera que la línea no es visible cuando el área de la máscara ($$ m_{00} $$) queda por debajo de un umbral mínimo. Comparar contra un umbral, en lugar de contra cero, evita que unos pocos píxeles sueltos de ruido se interpreten como línea, y de paso impide la división por cero en $$ \eqref{eq:centroide} $$.
+- **Detección de la pérdida:** se considera que la línea no es visible cuando el área de la máscara ($$ m_{00} $$) queda por debajo de un umbral mínimo. Comparar contra un umbral, en lugar de contra cero, evita que unos pocos píxeles sueltos de ruido se interpreten como línea, y de paso impide la división por cero en centroide.
 - **Dirección de búsqueda:** se guarda el **signo del último error** conocido, que indica por qué lado se escapó la línea, y se gira hacia ese lado. Girar en la dirección equivocada alejaría definitivamente el coche del trazado.
 - **Parámetros de búsqueda:** velocidad lineal baja y velocidad angular elevada, para maniobrar sin alejarse más del trazado.
 - **Retorno:** en cuanto el área de la máscara vuelve a superar el umbral, se recupera el estado SEGUIR.
