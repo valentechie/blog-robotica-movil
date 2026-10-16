@@ -1,16 +1,13 @@
 ---
 title: "Práctica 2: Visual follow Line"
 date: 2026-10-08 01:00:00 +0200
-image:
-  path: /assets/img/.png
-  alt: captura del circuito
 tags: [opencv, pid, control]
 description: "Control Visual con PID de un Fórmula1"
 pin: true
 math: true
 ---
 
-# Objetivo
+## Objetivo
 El objetivo de esta práctica es programar un Fórmula 1 para que siga la línea roja pintada en el centro del circuito, usando únicamente la información que obtiene de su cámara. El control debe ser **reactivo**, en cada iteración se decide qué hacer a partir de lo que se ve en ese instante, sin mapa ni trayectoria calculada de antemano.
 
 Más allá de completar la vuelta, el controlador debe cumplir cuatro condiciones, no oscilar, ser rápido, funcionar en circuitos distintos sin tocar el código y recuperar la línea si llega a perderla. A esto se suma que el ejercicio se resuelve dos veces, una para el coche holonómico y otra para el no holonómico, porque la forma de moverse de cada uno condiciona el control.
@@ -80,8 +77,9 @@ Los dos comportamientos defectuosos típicos son:
 | Oscilaciones inestables | El coche zigzaguea con amplitud creciente hasta salirse | $$ K_p $$ demasiado alto o $$ K_d $$ insuficiente |
 | Respuesta lenta | El coche no llega a tiempo a las curvas | $$ K_p $$ demasiado bajo o velocidad excesiva |
 
+{% raw %}{% comment %}
 ![Oscilaciones y respuesta lenta](/assets/img/follow-line/oscilaciones.png)
-
+{% endcomment %}{% endraw %}
 
 ### Holonómico vs. no holonómico
 
