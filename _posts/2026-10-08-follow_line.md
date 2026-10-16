@@ -23,7 +23,7 @@ Un **sistema de control** es aquel que gobierna el comportamiento de otro sistem
 
 El control de esta práctica es de lazo cerrado. La cámara mide continuamente dónde está la línea, el controlador compara esa posición con la deseada y ajusta el giro; el giro modifica la posición del coche, que la cámara vuelve a medir en la siguiente iteración. El bucle se repite unas cincuenta veces por segundo.
 
-![Esquema del sistema de control](/assets/img/follow-line/sistema_control.png)
+![Esquema del sistema de control](/assets/img/sistema_control.png)
 _Bucle de control cerrado implementado en la práctica_
 
 ### Definiciones
@@ -76,10 +76,6 @@ Los dos comportamientos defectuosos típicos son:
 |:--------|:------------|:---------------|
 | Oscilaciones inestables | El coche zigzaguea con amplitud creciente hasta salirse | $$ K_p $$ demasiado alto o $$ K_d $$ insuficiente |
 | Respuesta lenta | El coche no llega a tiempo a las curvas | $$ K_p $$ demasiado bajo o velocidad excesiva |
-
-{% raw %}{% comment %}
-![Oscilaciones y respuesta lenta](/assets/img/follow-line/oscilaciones.png)
-{% endcomment %}{% endraw %}
 
 ### Holonómico vs. no holonómico
 
