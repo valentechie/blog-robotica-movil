@@ -2,7 +2,7 @@
 title: "Práctica 4: Navegación global con algoritmo GPP"
 date: 2026-10-29 01:00:00 +0200
 tags: [global_navigation, gpp, planning]
-description: "Global Navigation using TeleTaxi"
+description: "Coche autónomo que planifica su ruta por la ciudad con Gradient Path Planning"
 pin: true
 math: true
 ---
@@ -25,3 +25,20 @@ El mapa es una matriz de $ 400 \times 400 $ (cada celda mide $ 1{,}25 $ m) con d
 Lo comprobé mirando la celda del taxi, que empieza en una calle.
 
 Al pasar un punto del mundo a celda se obtienen dos números $ (a, b) $, pero el mapa hay que leerlo **al revés**, como `mapa[b][a]`. Lo comprobé haciendo clic en varias calles, solo en ese orden salía siempre 255. Para no tener que recordarlo, lo metí en una función.
+
+### Propagación del campo
+El campo es otra matriz de $ 400 \times 400 $ en la que cada celda guarda el **coste de llegar desde ella al destino**.
+
+1. Todas las celdas empiezan en **infinito** ("aún no sé cuánto cuesta") y el destino en **0**.
+2. Una **cola de prioridad** guarda las celdas pendientes y siempre devuelve la más barata, así la onda avanza en orden.
+3. Se saca una celda y se miran sus 8 vecinas. Si la vecina es calle y llegar por aquí cuesta menos de lo que tenía, se actualiza y se mete en la cola.
+
+| Celda vecina | Coste del paso |
+|:-------|:--------------:|
+| Recta | 1 |
+| Diagonal | 1,41 ($ \sqrt{2} $) |
+
+No hace falta calcular toda la ciudad. La onda **se para** cuando supera el coste del taxi en un margen de 20 celdas, para que el coche tenga valores a su alrededor.
+
+![Campo de propagación](/assets/img/campo_propagacion.png)
+_El destino es lo más oscuro y las calles se aclaran al alejarse. En blanco, los edificios y lo que no se ha calculado_
