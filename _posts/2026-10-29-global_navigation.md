@@ -44,8 +44,12 @@ No hace falta calcular toda la ciudad. La onda **se para** cuando supera el cost
 _El destino es lo más oscuro y las calles se aclaran al alejarse. En blanco, los edificios y lo que no se ha calculado_
 
 ### Penalización de obstáculos
-Para penalizar por **cercanía** a los edificios, primero hay que medir lo cerca que está cada celda del edificio más próximo. Para eso se "engordan" los edificios **capa a capa**. La capa 1 son las calles que tocan un edificio, la capa 2 las que tocan la capa 1, y así hasta 5 capas. Es como otra onda, pero que sale de todos los edificios a la vez. **Cada capa suma una penalización que baja al alejarse del edificio**.
+Para penalizar por **cercanía** a los edificios, primero hay que medir lo cerca que está cada celda del edificio más próximo. Para eso se "engordan" los edificios **capa a capa**. La capa 1 son las calles que tocan un edificio, la capa 2 las que tocan la capa 1, y así hasta 5 capas. Es como otra onda, pero que sale de todos los edificios a la vez. 
+
+**Cada capa suma una penalización que baja al alejarse del edificio**.
  
-> Como los edificios no se mueven, la penalización **no depende del destino**, se calcula una sola vez al arrancar, y en cada clic solo se recalcula la onda. El campo final es la suma **$ F = D + P $**.
+> Como los edificios no se mueven, la penalización **no depende del destino**, se calcula una sola vez al arrancar, y en cada clic solo se recalcula la onda.
+
+El campo final es la suma **$ F = D + P $**.
 
 ### Conducción
