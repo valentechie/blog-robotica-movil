@@ -53,3 +53,15 @@ Para penalizar por **cercanía** a los edificios, primero hay que medir lo cerca
 El campo final es la suma **$ F = D + P $**.
 
 ### Conducción
+Para ello dentro del bucle, le agrego una nueva constante que sería la distancia entre donde está y la meta.
+
+Para ello le agrego un condicional de **navegando**, donde primero lee el dato de la posición actual, luego calculo la distancia y aplicando **navegacion local** vista en la practica 3 hago que se mueva.
+
+### Estados
+Esperando -> Navegando (bucle)
+
+## Resultados
+
+{% include embed/youtube.html id='' %}
+
+Esta práctica corresponde al ejercicio [Global Navigation using TeleTaxi](https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/global_navigation/) de Robotics Academy.
